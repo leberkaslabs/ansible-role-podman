@@ -1,0 +1,23 @@
+---
+- name: Install the Podman package
+  ansible.builtin.package:
+    name: podman
+    state: present
+
+- name: Suppress Docker CLI emulation message
+  ansible.builtin.template:
+    dest: /etc/containers/nodocker
+    src: nodocker.j2
+    group: root
+    owner: root
+    mode: "0644"
+
+- name: Setup Podman Bash completion
+  ansible.builtin.include_tasks: podman_completion.yml
+  when: podman_completion_enabled | bool
+
+- name: Start and enable Podman service
+  ansible.builtin.service:
+    name: podman.socket
+    enabled: true
+    state: started

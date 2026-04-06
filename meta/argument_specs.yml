@@ -1,0 +1,23 @@
+---
+argument_specs:
+  main:
+    author: Niclas Spreng
+    description: Install and configure Podman on linux systems.
+    short_description: podman
+    options:
+      podman_completion_enabled:
+        description: Enable Podman Bash Completion.
+        required: true
+        type: bool
+      podman_completion_path:
+        description: Where the Podman completion script will be stored.
+        required: true
+        type: str
+      podman_completion_group:
+        description: Group that will own the script file.
+        required: true
+        type: str
+      podman_completion_owner:
+        description: User who will own the script file.
+        required: true
+        type: str

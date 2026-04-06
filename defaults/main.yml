@@ -1,0 +1,11 @@
+---
+# Enable Podman Bash Completion.
+podman_completion_enabled: true
+
+# Configuration for Podman Bash Completion Script.
+# - Path: Where the Podman completion script will be stored.
+# - Group: Group that will own the script file.
+# - Owner: User who will own the script file.
+podman_completion_path: /etc/bash_completion.d/podman
+podman_completion_group: root
+podman_completion_owner: root

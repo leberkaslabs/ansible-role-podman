@@ -1,0 +1,27 @@
+---
+- name: Install bash-completion for Podman
+  ansible.builtin.package:
+    name: bash-completion
+    state: present
+
+- name: Generate Podman bash completion script
+  ansible.builtin.command:
+    cmd: podman completion bash
+  register: podman_completion_bash
+  changed_when: false
+
+- name: Ensure Bash completion directory is present
+  ansible.builtin.file:
+    path: "{{ podman_completion_path | ansible.builtin.dirname }}"
+    group: "{{ podman_completion_group }}"
+    owner: "{{ podman_completion_owner }}"
+    mode: "0755"
+    state: directory
+
+- name: Manage Podman bash completion script
+  ansible.builtin.copy:
+    content: "{{ podman_completion_bash.stdout }}"
+    dest: "{{ podman_completion_path }}"
+    group: "{{ podman_completion_group }}"
+    owner: "{{ podman_completion_owner }}"
+    mode: "0644"
